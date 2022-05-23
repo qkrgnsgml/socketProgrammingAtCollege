@@ -1,0 +1,39 @@
+9주차 TCP/IP
+
+책 페이지 33
+
+vi / gedit  c언어 코딩
+
+> 파일 출력
+
+cat 파일 내용 보기
+
+ls , ls -al
+
+socket함수의 return 은 정수형 3부터 시작
+
+clear 정리
+
+gcc 코딩파일 -o 이름  > 컴파일 실행파일 만듬
+
+이름 안붙히면 a.out생성
+
+./이름  현재 디렉토리의 파일 실행
+
+코딩 수정할때 esc + w , 글쓸때 esc + i , a 
+한글자씩 지우기 esc + x
+줄지우기 dd
+나갈때 esc + : wq (저장후 나감) q! (그냥 나감)
+
+socket함수첫인자 : PF_INET	만 알면됨 ( IPv4 인터넷 프로토콜)
+socket함수둘인자 : SOCK_STREAM(연결형, TCP)
+		SOCK_DGRAM(비연결형, UDP)
+
+연결형 : 순서 보장
+비연결형 : 순서 없음
+
+socket함수셋인자 : STREAM, DGRAM 은 둘다 걍 0써주면 됨
+
+int socket(int domain, int type, int protocol)
+
+close() : 소켓 생성후 종료

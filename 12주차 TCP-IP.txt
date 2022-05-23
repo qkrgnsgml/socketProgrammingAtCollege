@@ -1,0 +1,45 @@
+12주차 TCP/IP
+
+SERVER, client 소스 확인 후 분석
+read와 write가 서로 짝이 맞게 왓다갓다 하면서 주고받음
+
+server	client
+write	read
+read	write
+
+"abc"를 write를 하고 read를 한번하면 안댐!
+해외나 가끔 네트워크가 안좋으면 데이터를 쪼개서 보냄(window크기)
+말도 안하고 자기 혼자 줄여서 보냄(잘라서 보내짐)
+TCP가 주고받는 데이터는 경계가 없다 (abc순서 상관없이 보냄)
+
+read를 데이터 다 받을때까지 while문에 넣고 read함
+
+UDP
+책 p.153
+read, write가 없음
+send to, recivfrom
+
+server	client
+recvfrom sendto
+sendto	recvfrom
+
+터미널 두개 동시 연결 가능
+iterative지만 concurrent처럼
+UDP는 연결자체가 없음
+
+매번 주소를 받음
+
+UDP는 TCP와 다르게 데이터의 경계가 있어서 한번만 읽으면 됨
+But 아예 안갈때가 있음 (가끔)
+
+일반적인 UDP에서 connect(연결) 이란
+원래는 평소에는 연결이 없음
+UDP는 연결이 없는거 같지만 sendto recvfrom 할때 
+순간적인 연결을 만들었다가 바로 만들고 보내고 없앤다.
+위 과정이 UDP전송의 1/3을 차지
+
+> UDP에 connect()를 주면
+연결의 속도를 줄여줌 read, write사용 가능
+책 p.163
+
+But 쓰지마라, UDP, TCP 혼동와서 나중에 망함

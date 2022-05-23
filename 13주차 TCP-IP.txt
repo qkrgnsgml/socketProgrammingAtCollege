@@ -1,0 +1,34 @@
+13주차 tcp ip
+
+
+173~175 file_server.c 치기
+
+175~176 file_client.c 치기
+
+
+서버 실행하고 클라이언트 키면 파일이 다운받아지고 메세지가 보내짐
+
+
+코드 설명
+
+
+파일 다 보내고 close 할때 EOF 보내면 client에서 read 가 0을 받아서 while문이 끝남
+
+
+위의 거는 문자 보낼때
+
+
+file보낼때는 close 대신 shutdown을 보내서 쓰는부분만 닫기 를 함. 받기는 가능  (반 닫기 half close) 라고 함
+
+
+소켓은 2개의 스트림 으로 이루어져있음 입력스트림 출력스트림, 셧다운은 하나만 닫기 클로즈는 다 닫기
+
+shotdown(socket, how) how 는 wd, wr, wdwr 읽기닫기 출력닫기, 둘다닫기
+
+
+13주차의 하이라이트는 셧다운!
+
+gethostbyname, gethostbyaddr
+
+
+DNS의 함수 , 도메인으로 ip얻기, ip로 도메인이름얻기

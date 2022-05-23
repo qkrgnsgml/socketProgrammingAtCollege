@@ -1,0 +1,69 @@
+11주차 TCP/IP
+강의자료 7, 9, 10주차
+
+p.110~112 echo 서버
+p.112~113 echo client 
+위 코드 살펴보기
+
+struct sockaddr_in 구조체
+
+memset이 구조체를 0으로 채워줌
+
+책 76페이지 코딩
+
+매개변수 argv[1] [2] argc는 문자열 개수
+argv[0]은 실행파일 이름
+
+"./eclient" "127.0.0.1" "9190"
+argv[0]       argv[1]     argv[2]
+
+9190은 atoi로 int로 바꾸고 htons해주면 되는데
+ip주소는 해줄게 맣아서 inet_addr해줘야함(.도 빼고 인디언 빅 등)
+
+서버에서는 IP주소를 자동으로 할당 INADDR_ANY로 할당
+client에서는 서버의 주소를 알아야해서 직접 입력
+
+지금까지 socket bind 햇음 이제 listen accept
+
+listen : 연결요청 대기
+
+iterative 서버에서 여러명 서버 연결요청하면 
+첫번째로 들어온 애가 먼저 들어가고 나머지는
+연결 요청 대기 큐에 들어가서 기다림(listen) 우리프로그램은 5로설정
+교안의 그림 확인
+
+listen함수 연결 요청 대기 큐 생성
+2번째 파라미터가 대기큐의 크기
+
+큐에서 넘어온 것을 accept에서 받음
+
+제일 중요 : for문 안에 clnt_sock
+read, write 는 clnt_sock 을 통해서함
+
+socket(생성), bind, listen, accept는 맨 앞의 매개변수 serv_sock로 함
+
+accept로 새로운 clnt_sock만들어서 read와 write에 사용함
+serv_sock는 연결만 받는 소켓
+clnt_sock는 만들어서 사용하는 통신용 socket
+
+TCP는 연결용, 통신용 소켓이 구별 UDP는 안그럼
+
+concurrent라고 했을때 연결용 통신용이 구별이 안돼있을대(1개로 다사용)
+어떤 client가 어떤 socket을 쓰는지 구분을 못함
+그래서 각 clin_sock을 새로 만들어줌
+
+client는 소켓 통신 하나로 사용함 (서버는 두개로 구분)
+
+client는 socket로 만들고
+connect로 서버랑 연결하고 (매개변수 사용)
+fputs로 메세지 받아서 
+write 로 연결된 소켓에 써주고 다시 돌아오는거 read해주고
+
+strcmp (string compare 문자열 비교) 같으면 0
+
+listen과 accept가 어떻게 연결이 되는지
+변수들이 어떤게 연결되는지 소스보면서 확인
+write와 read가 어떻게 상호작용한는지
+
+특수문자를 read하면 0이 됨 (while문 종료 : 0일때) EOF(End Of File)
+close()하면 0을 보냄 나 끝났어 소켓닫는다. > 0보냄 서버에서 EOF받음 > while문 종료

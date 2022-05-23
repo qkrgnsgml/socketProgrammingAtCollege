@@ -1,0 +1,28 @@
+10주차 TCP/IP
+
+p.110~112 echo 서버
+p.112~113 echo client
+
+터미널 두개 켜서 서버키고 클라이언트 키고
+
+서버의 종류 두개 우리가 한건 iterative라 터미널 두개 연결x
+
+서버에 socket, bind, listen, accept     read, write
+클라이언트에 socket, connect 	write, read
+
+클라이언트가 write한거 server가 read하고 서버가 write한거
+클라이언트가 read해서 화면에 띄워줌
+
+while문에 printf(%s, message) 찍어주면 클라이언트에서 받아서 넘겨주는데
+한글자식 이상한거 넘어옴 맨끝문자가 null이라 0만날떄까지 이상한거
+
+서버에 while문에 message[str_len] =0 해주면 맨마지막에 0넣어줘서
+정상적으로 찍힘
+
+소켓주소 = IP주소 + port주소
+224.120.90.114 를 2진수로 바꾸고 16진수로 바꿈 ip주소 그리고 순서 바뀜
+
+호스트 바이트 순서  big endian , little endian  책 p.75
+little : 거꾸로 읽음 stack
+big : 그대로 읽음 
+바이트 순서 변환함수
