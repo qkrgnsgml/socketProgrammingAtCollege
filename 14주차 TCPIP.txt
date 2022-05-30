@@ -1,0 +1,42 @@
+14주차 TCP/IP
+
+시험범위 : 멀티태스킹 서버 구현까지
+
+fork 프로세스 생성
+
+ps 현재 커맨드에서 사용하는 프로세스상태 보여주는 명령어(process status)
+
+포크 : 진짜 포크 1개에서 여러개 프로세스 만들고 동시동작
+
+if else 면 둘중 하나만 찍혀야하는데
+fork 를 사용하면 두개 다 찍을 수 있음(멀티 태스킹)
+
+fork 라는 함수가 실행되면 프로세스를 하나 더 만들고
+원래잇는 친구가 parent고 새로만든애가 child
+
+child는 pid가 0이 return parent는 0이 아님(child의 프로세스 아이디)
+
+책 245~247 concurrent 서버 
+
+옛날에 쳣던 client 실행시키면 다중접속 가능
+
+mpserv에서 parent는 while문 돌면서 fork만 하고
+fork로 생성된 자식은 read와 write만 해줌
+
+TCP는 통신용 소켓을 따로 만든다 accept하는 순간
+
+return은 정상종료
+exit는 긴급종료(비정상)
+
+wait는 무한대기 걸릴수잇어서 안씀
+waitpid 사용함
+
+좀비프로세스 안만들려고 SIGCHLD받아서 waitpid 실행시켜줌(함수 따로)
+
+accept하고 fork로 다중 만들고 child는 pid가 0 parent는 0이 아닌 작업(accept)
+
+좀비 프로세스 안만들기위해 다른 작업을 해줌 waitpid 
+
+연습문제 80% 이상, 다른거는 echo_client udp echo_client file_client + server 중에 하나 나옴 약간 변형
+교수님이 강조햇던 내용 나옴 bind listent accept socket
+
